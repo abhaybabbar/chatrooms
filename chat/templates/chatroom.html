@@ -37,11 +37,13 @@
         const user_username = JSON.parse(document.getElementById('user_username').textContent);
         document.querySelector('#submit').onclick = function (e) {
             const messageInputDom = document.querySelector('#input');
-            const message = messageInputDom.value;
-            chatSocket.send(JSON.stringify({
-                'message': message,
-            }));
-            messageInputDom.value = '';
+            const message = messageInputDom.value.trim();
+            if (message!='') {
+                chatSocket.send(JSON.stringify({
+                    'message': message,
+                }));
+                messageInputDom.value = '';
+            }
         };
 
         document.querySelector('#input').onkeyup = function(e) {
